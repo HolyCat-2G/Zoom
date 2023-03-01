@@ -1,0 +1,102 @@
+local zoomed = false
+local default_fov = nil
+local default_hud_fov = nil
+
+local KEY_ZOOM_IN = DIK_keys.MOUSE_5
+local KEY_ZOOM_OUT = DIK_keys.MOUSE_4
+
+local mcm_keybinds = ui_mcm and ui_mcm.key_hold
+
+function on_mcm_load()
+    local options = {
+        id = "hc_zoom",
+        sh = true,
+        gr = {
+            { id = "hc_zoom",          type = "slide",    link = "ui_options_slider_player",   text = "ui_mcm_menu_hc_zoom", size = { 512, 50 }, spacing = 20 },
+            { id = "key_zoom_in",      type = "key_bind", val = 2,                             def = KEY_ZOOM_IN },
+            { id = "key_zoom_out",     type = "key_bind", val = 2,                             def = KEY_ZOOM_OUT },
+
+            { id = "divider",          type = "line" },
+            { id = "desc_mcm",         type = "desc",     text = "ui_mcm_menu_hc_zoom_text_in" },
+            { id = "zoom_in_fov",      type = "track",    val = 2,                             min = 5,                      max = 150,        step = 1,    def = 50 },
+            { id = "zoom_in_hud_fov",  type = "track",    val = 2,                             min = 0.1,                    max = 1,          step = 0.01, def = 0.4 },
+
+            { id = "divider",          type = "line" },
+            { id = "desc_mcm",         type = "desc",     text = "ui_mcm_menu_hc_zoom_text_out" },
+            { id = "zoom_out_fov",     type = "track",    val = 2,                             min = 5,                      max = 150,        step = 1,    def = 100 },
+            { id = "zoom_out_hud_fov", type = "track",    val = 2,                             min = 0.1,                    max = 1,          step = 0.01, def = 0.9 }
+        },
+    }
+    return options
+end
+
+function on_key_press(key)
+    if (key == KEY_ZOOM_IN) and actor_menu.is_hud_free() then
+        if ui_mcm.double_tap("hc_zoom", key) then
+            if zoomed then
+                def_fov()
+            else
+                set_fov(zoom_in_fov, zoom_in_hud_fov)
+            end
+        else
+            ui_mcm.simple_press("hc_zoom", key, set_fov(zoom_in_fov, zoom_in_hud_fov))
+        end
+    end
+    if (key == KEY_ZOOM_OUT) and actor_menu.is_hud_free() then
+        if ui_mcm.double_tap("hc_zoom", key) then
+            if zoomed then
+                def_fov()
+            else
+                set_fov(zoom_out_fov, zoom_out_hud_fov)
+            end
+        else
+            ui_mcm.simple_press("hc_zoom", key, set_fov(zoom_out_fov, zoom_out_hud_fov))
+        end
+    end
+end
+
+function on_key_release(key)
+    if (key == KEY_ZOOM_IN or key == KEY_ZOOM_OUT) then
+        if not ui_mcm.double_tap("hc_zoom", key) then
+            ui_mcm.simple_press("hc_zoom", key, def_fov())
+        end
+    end
+end
+
+function set_fov(fov, hud_fov)
+    exec_console_cmd(string.format("fov %s", fov))
+    exec_console_cmd(string.format("hud_fov %s", hud_fov))
+    zoomed = true
+end
+
+function def_fov()
+    exec_console_cmd(string.format("fov %s", default_fov))
+    exec_console_cmd(string.format("hud_fov %s", default_hud_fov))
+    zoomed = false
+end
+
+function on_option_change(mcm)
+    if mcm then
+        KEY_ZOOM_IN = ui_mcm.get("hc_zoom/key_zoom_in") or KEY_ZOOM_IN
+        KEY_ZOOM_OUT = ui_mcm.get("hc_zoom/key_zoom_out") or KEY_ZOOM_OUT
+
+        zoom_in_fov = ui_mcm.get("hc_zoom/zoom_in_fov")
+        zoom_in_hud_fov = ui_mcm.get("hc_zoom/zoom_in_hud_fov")
+        zoom_out_fov = ui_mcm.get("hc_zoom/zoom_out_fov")
+        zoom_out_hud_fov = ui_mcm.get("hc_zoom/zoom_out_hud_fov")
+    end
+    default_fov = ui_options.get("video/basic/fov")
+    default_hud_fov = ui_options.get("video/basic/hud_fov")
+    def_fov()
+end
+
+function on_game_start()
+    RegisterScriptCallback("on_key_release", on_key_release)
+    RegisterScriptCallback("on_key_press", on_key_press)
+
+    RegisterScriptCallback("on_option_change", on_option_change)
+    RegisterScriptCallback("on_game_load", on_option_change)
+    -- RegisterScriptCallback("GUI_on_show", on_option_change)
+
+    on_option_change(mcm_keybinds)
+end

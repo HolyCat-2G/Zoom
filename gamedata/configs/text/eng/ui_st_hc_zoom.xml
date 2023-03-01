@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>	
+    <string id="ui_mcm_menu_hc_zoom">
+        <text>Zooming</text>
+    </string>
+	<string id="ui_mcm_hc_zoom_key_zoom_in">
+		<text>Zoom in</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_key_zoom_in_desc">
+		<text>Holding down this key zooms in on the camera, double-clicking toggles zooming</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_key_zoom_out">
+		<text>Zoom out</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_key_zoom_out_desc">
+		<text>Holding down this key zooms out the camera, double-clicking toggles zoom</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_zoom_in_fov">
+		<text>FOV</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_zoom_in_hud_fov">
+		<text>HUD FOV</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_zoom_out_fov">
+		<text>FOV</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_zoom_out_hud_fov">
+		<text>HUD FOV</text>
+	</string>
+	<string id="ui_mcm_menu_hc_zoom_text_in">
+		<text>FOV settings for zoom in</text>
+	</string>
+	<string id="ui_mcm_menu_hc_zoom_text_out">
+		<text>FOV settings when zoom out</text>
+	</string>
+</string_table>

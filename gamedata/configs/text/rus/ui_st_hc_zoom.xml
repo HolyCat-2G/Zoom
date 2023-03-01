@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>	
+    <string id="ui_mcm_menu_hc_zoom">
+        <text>Приближение</text>
+    </string>
+	<string id="ui_mcm_hc_zoom_key_zoom_in">
+		<text>Клавиша приближения</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_key_zoom_in_desc">
+		<text>Удержание данной клавиши приблежает камеру, двойное нажатие переключает приблежение</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_key_zoom_out">
+		<text>Клавиша отдаления</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_key_zoom_out_desc">
+		<text>Удержание данной клавиши отдаляет камеру, двойное нажатие переключает отдаление</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_zoom_in_fov">
+		<text>FOV</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_zoom_in_hud_fov">
+		<text>HUD FOV</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_zoom_out_fov">
+		<text>FOV</text>
+	</string>
+	<string id="ui_mcm_hc_zoom_zoom_out_hud_fov">
+		<text>HUD FOV</text>
+	</string>
+	<string id="ui_mcm_menu_hc_zoom_text_in">
+		<text>Настройки FOV при приблежении</text>
+	</string>
+	<string id="ui_mcm_menu_hc_zoom_text_out">
+		<text>Настройки FOV при отдалении</text>
+	</string>
+</string_table>
